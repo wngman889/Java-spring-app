@@ -38,6 +38,12 @@ public class User {
             CascadeType.REMOVE})
     private List<Reviews> userReviews = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE})
+    private List<Reviews> userEvents = new ArrayList<>();
+
     public User() {
 
     }
@@ -113,6 +119,14 @@ public class User {
 
     public void setUserReviews(List<Reviews> userReviews) {
         this.userReviews = userReviews;
+    }
+
+    public List<Reviews> getUserEvents() {
+        return userEvents;
+    }
+
+    public void setUserEvents(List<Reviews> userEvents) {
+        this.userEvents = userEvents;
     }
 
     @Override

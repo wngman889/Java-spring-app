@@ -27,6 +27,12 @@ public class Games {
             CascadeType.REMOVE})
     private List<Reviews> gameReviews = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "games", cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE})
+    private List<Reviews> gameEvents = new ArrayList<>();
+
     public Games() {
 
     }
@@ -75,5 +81,23 @@ public class Games {
 
     public void setGameReviews(List<Reviews> gameReviews) {
         this.gameReviews = gameReviews;
+    }
+
+    public List<Reviews> getGameEvents() {
+        return gameEvents;
+    }
+
+    public void setGameEvents(List<Reviews> gameEvents) {
+        this.gameEvents = gameEvents;
+    }
+
+    @Override
+    public String toString() {
+        return "Games{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", gameDesc='" + gameDesc + '\'' +
+                ", genre='" + genre + '\'' +
+                '}';
     }
 }
