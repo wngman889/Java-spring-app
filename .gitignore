@@ -28,9 +28,6 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-<<<<<<< HEAD
 
 ### VS Code ###
 .vscode/
-=======
->>>>>>> 201ad30b61de28d3f01a6f417113561817509c96
