@@ -2,6 +2,9 @@ package com.restapi.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="reviews_recommendations")
 public class Reviews {
@@ -9,20 +12,6 @@ public class Reviews {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
-
-    @ManyToMany(cascade = {CascadeType.DETACH,
-                         CascadeType.MERGE,
-                         CascadeType.REFRESH,
-                         CascadeType.REMOVE})
-    @JoinColumn(name = "author_id")
-    private int authorId;
-
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    @JoinColumn(name = "game_id")
-    private int gameId;
 
     @Column(name="review_title")
     private String reviewTitle;
@@ -32,6 +21,18 @@ public class Reviews {
 
     @Column(name="review_description")
     private String reviewDescription;
+
+    @ManyToMany(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE})
+    private List<Games> games = new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE})
+    private List<User> users = new ArrayList<>();
 
     public Reviews() {
 
@@ -49,22 +50,6 @@ public class Reviews {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
-    }
-
-    public int getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
     }
 
     public String getReviewTitle() {
@@ -91,12 +76,26 @@ public class Reviews {
         this.reviewDescription = reviewDescription;
     }
 
+    public List<Games> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Games> games) {
+        this.games = games;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
         return "Reviews{" +
                 "id=" + id +
-                ", authorId=" + authorId +
-                ", gameId=" + gameId +
                 ", reviewTitle='" + reviewTitle + '\'' +
                 ", rating=" + rating +
                 ", reviewDescription='" + reviewDescription + '\'' +

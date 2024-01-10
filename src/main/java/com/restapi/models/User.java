@@ -2,7 +2,9 @@ package com.restapi.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -29,6 +31,12 @@ public class User {
 
     @Column(name="steam_id")
     private String steamId;
+
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE})
+    private List<Reviews> userReviews = new ArrayList<>();
 
     public User() {
 
@@ -97,6 +105,14 @@ public class User {
 
     public void setSteamId(String steamId) {
         this.steamId = steamId;
+    }
+
+    public List<Reviews> getUserReviews() {
+        return userReviews;
+    }
+
+    public void setUserReviews(List<Reviews> userReviews) {
+        this.userReviews = userReviews;
     }
 
     @Override
