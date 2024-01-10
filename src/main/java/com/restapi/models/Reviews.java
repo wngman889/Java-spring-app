@@ -10,14 +10,14 @@ public class Reviews {
     @Column(name="id")
     private int id;
 
-    @OneToOne(cascade = {CascadeType.DETACH,
+    @ManyToMany(cascade = {CascadeType.DETACH,
                          CascadeType.MERGE,
                          CascadeType.REFRESH,
                          CascadeType.REMOVE})
     @JoinColumn(name = "author_id")
     private int authorId;
 
-    @OneToOne(cascade = {CascadeType.DETACH,
+    @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})
