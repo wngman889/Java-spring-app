@@ -1,5 +1,6 @@
 package com.restapi.dao;
 
+import com.restapi.mappers.EventsMapper;
 import com.restapi.models.Events;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -12,9 +13,12 @@ import java.util.List;
 public class EventsDAOImpl implements CustomDAO<Events> {
     private EntityManager _entityManager;
 
+    private EventsMapper _eventsMapper;
+
     @Autowired
-    public EventsDAOImpl(EntityManager _entityManager) {
+    public EventsDAOImpl(EntityManager _entityManager, EventsMapper _eventsMapper) {
         this._entityManager = _entityManager;
+        this._eventsMapper = _eventsMapper;
     }
 
     @Override
@@ -33,7 +37,10 @@ public class EventsDAOImpl implements CustomDAO<Events> {
     @Override
     public Events save(Events saveInDB) {
 
-        return _entityManager.merge(saveInDB);
+        Events mappedEvents = _eventsMapper.eventsToEvents(saveInDB);
+
+        // Perform the merge with the converted Events
+        return _entityManager.merge(mappedEvents);
     }
 
     @Override
