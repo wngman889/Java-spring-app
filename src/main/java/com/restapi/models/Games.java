@@ -31,7 +31,7 @@ public class Games {
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})
-    private List<Reviews> gameEvents = new ArrayList<>();
+    private List<Events> gameEvents = new ArrayList<>();
 
     public Games() {
 
@@ -83,11 +83,11 @@ public class Games {
         this.gameReviews = gameReviews;
     }
 
-    public List<Reviews> getGameEvents() {
+    public List<Events> getGameEvents() {
         return gameEvents;
     }
 
-    public void setGameEvents(List<Reviews> gameEvents) {
+    public void setGameEvents(List<Events> gameEvents) {
         this.gameEvents = gameEvents;
     }
 

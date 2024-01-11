@@ -42,7 +42,7 @@ public class User {
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})
-    private List<Reviews> userEvents = new ArrayList<>();
+    private List<Events> userEvents = new ArrayList<>();
 
     public User() {
 
@@ -121,11 +121,11 @@ public class User {
         this.userReviews = userReviews;
     }
 
-    public List<Reviews> getUserEvents() {
+    public List<Events> getUserEvents() {
         return userEvents;
     }
 
-    public void setUserEvents(List<Reviews> userEvents) {
+    public void setUserEvents(List<Events> userEvents) {
         this.userEvents = userEvents;
     }
 
