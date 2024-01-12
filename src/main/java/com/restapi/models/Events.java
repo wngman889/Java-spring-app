@@ -2,6 +2,7 @@ package com.restapi.models;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jdk.jfr.Event;
 
@@ -20,35 +21,45 @@ public class Events {
 
     private String description;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    @JoinTable(
-            name = "events_games",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "game_id")
-    )
-    private List<Games> games;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.REFRESH,
+//            CascadeType.REMOVE})
+//    @JoinTable(
+//            name = "events_games",
+//            joinColumns = @JoinColumn(name = "event_id"),
+//            inverseJoinColumns = @JoinColumn(name = "game_id")
+//    )
+//    private List<Games> games;
+    @ElementCollection
+    @CollectionTable(name = "events_games", joinColumns = @JoinColumn(name = "event_id"))
+    @Column(name = "game_id")
+    private List<Integer> gameIds;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    @JoinTable(
-            name = "events_users",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> users;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.REFRESH,
+//            CascadeType.REMOVE})
+//    @JoinTable(
+//            name = "events_users",
+//            joinColumns = @JoinColumn(name = "event_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id")
+//    )
+//    private List<User> users;
+    @ElementCollection
+    @CollectionTable(name = "events_users", joinColumns = @JoinColumn(name = "event_id"))
+    @Column(name = "user_id")
+    private List<Integer> userIds;
 
     public Events() {
 
     }
 
-    public Events(Date date, String description) {
+    public Events(Date date, String description, List<Integer> gameIds, List<Integer> userIds) {
         this.date = date;
         this.description = description;
+        this.gameIds = gameIds;
+        this.userIds = userIds;
     }
 
     public int getId() {
@@ -75,20 +86,20 @@ public class Events {
         this.description = description;
     }
 
-    public List<Games> getGames() {
-        return games;
+    public List<Integer> getGameIds() {
+        return gameIds;
     }
 
-    public void setGames(List<Games> games) {
-        this.games = games;
+    public void setGameIds(List<Integer> gameIds) {
+        this.gameIds = gameIds;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Integer> getUserIds() {
+        return userIds;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserIds(List<Integer> userIds) {
+        this.userIds = userIds;
     }
 
     @Override

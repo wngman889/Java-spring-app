@@ -40,7 +40,7 @@ public class User {
             CascadeType.REMOVE})
     private List<Reviews> userReviews = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH,
+    @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})

@@ -48,10 +48,12 @@ public class Games {
 
     }
 
-    public Games(String title, String gameDesc, String genre) {
+    public Games(String title, String gameDesc, String genre, List<Reviews> gameReviews, List<Events> gameEvents) {
         this.title = title;
         this.gameDesc = gameDesc;
         this.genre = genre;
+        this.gameReviews = gameReviews;
+        this.gameEvents = gameEvents;
     }
 
     public int getId() {
