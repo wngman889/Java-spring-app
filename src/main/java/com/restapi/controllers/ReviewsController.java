@@ -1,6 +1,5 @@
 package com.restapi.controllers;
 
-import com.restapi.models.Events;
 import com.restapi.models.Games;
 import com.restapi.models.Reviews;
 import com.restapi.models.User;
