@@ -34,7 +34,7 @@ public class User {
     @Column(name="steam_id")
     private String steamId;
 
-    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH,
+    @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})

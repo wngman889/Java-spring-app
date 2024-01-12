@@ -23,26 +23,26 @@ public class Reviews {
     @Column(name="review_description")
     private String reviewDescription;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    private List<Games> games = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "games_reviews_recommendations", joinColumns = @JoinColumn(name = "review_id"))
+    @Column(name = "game_id")
+    private List<Integer> gameIds;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    private List<User> users = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "user_games", joinColumns = @JoinColumn(name = "review_id"))
+    @Column(name = "user_id")
+    private List<Integer> userIds;
 
     public Reviews() {
 
     }
 
-    public Reviews(String reviewTitle, int rating, String reviewDescription) {
+    public Reviews(String reviewTitle, int rating, String reviewDescription, List<Integer> gameIds, List<Integer> userIds) {
         this.reviewTitle = reviewTitle;
         this.rating = rating;
         this.reviewDescription = reviewDescription;
+        this.gameIds = gameIds;
+        this.userIds = userIds;
     }
 
     public int getId() {
@@ -77,20 +77,20 @@ public class Reviews {
         this.reviewDescription = reviewDescription;
     }
 
-    public List<Games> getGames() {
-        return games;
+    public List<Integer> getGameIds() {
+        return gameIds;
     }
 
-    public void setGames(List<Games> games) {
-        this.games = games;
+    public void setGameIds(List<Integer> gameIds) {
+        this.gameIds = gameIds;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Integer> getUserIds() {
+        return userIds;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserIds(List<Integer> userIds) {
+        this.userIds = userIds;
     }
 
     @Override
