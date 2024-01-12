@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.Mapping;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface EventsMapper {
-    @Mapping(target = "games", ignore = true)
-    @Mapping(target = "users", ignore = true)
-    Events eventsToEvents(Events events);
-
-    @Mapping(target = "games", ignore = true)
-    @Mapping(target = "users", ignore = true)
-    Events eventsDtoToEvents(EventsDto eventsDto);
+//    @Mapping(target = "games", ignore = true)
+//    @Mapping(target = "users", ignore = true)
+//    Events eventsToEvents(Events events);
+//
+//    @Mapping(target = "games", ignore = true)
+//    @Mapping(target = "users", ignore = true)
+//    Events eventsDtoToEvents(EventsDto eventsDto);
 }
