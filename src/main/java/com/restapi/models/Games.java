@@ -22,38 +22,26 @@ public class Games {
     @Column(name="genre")
     private String genre;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    @JoinTable(
-            name = "games_reviews_recommendations",
-            joinColumns = @JoinColumn(name = "game_id"),
-            inverseJoinColumns = @JoinColumn(name = "review_id")
-    )
-    private List<Reviews> gameReviews;
+    @ElementCollection
+    @CollectionTable(name = "games_reviews_recommendations", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "review_id")
+    private List<Integer> reviewIds;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    @JoinTable(
-            name = "events_games",
-            joinColumns = @JoinColumn(name = "game_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
-    )
-    private List<Events> gameEvents = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "events_games", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "event_id")
+    private List<Integer> eventIds;
 
     public Games() {
 
     }
 
-    public Games(String title, String gameDesc, String genre, List<Reviews> gameReviews, List<Events> gameEvents) {
+    public Games(String title, String gameDesc, String genre, List<Integer> reviewIds, List<Integer> eventIds) {
         this.title = title;
         this.gameDesc = gameDesc;
         this.genre = genre;
-        this.gameReviews = gameReviews;
-        this.gameEvents = gameEvents;
+        this.reviewIds = reviewIds;
+        this.eventIds = eventIds;
     }
 
     public int getId() {
@@ -88,20 +76,20 @@ public class Games {
         this.genre = genre;
     }
 
-    public List<Reviews> getGameReviews() {
-        return gameReviews;
+    public List<Integer> getReviewIds() {
+        return reviewIds;
     }
 
-    public void setGameReviews(List<Reviews> gameReviews) {
-        this.gameReviews = gameReviews;
+    public void setReviewIds(List<Integer> reviewIds) {
+        this.reviewIds = reviewIds;
     }
 
-    public List<Events> getGameEvents() {
-        return gameEvents;
+    public List<Integer> getEventIds() {
+        return eventIds;
     }
 
-    public void setGameEvents(List<Events> gameEvents) {
-        this.gameEvents = gameEvents;
+    public void setEventIds(List<Integer> eventIds) {
+        this.eventIds = eventIds;
     }
 
     @Override
