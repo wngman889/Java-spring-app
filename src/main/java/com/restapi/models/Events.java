@@ -1,12 +1,7 @@
 package com.restapi.models;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jdk.jfr.Event;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

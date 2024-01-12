@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -66,7 +65,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/addUser/{username}, {password}, {email}, {profileDesc}, {reviewId}, {eventId}")
     public ResponseEntity<User> addUser(@RequestBody User user,
                                            @PathVariable String username,
                                            @PathVariable String password,
@@ -79,10 +78,8 @@ public class UserController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 
-            // Set the userIds in the Events object
             user.setReviewsIds(Collections.singletonList(reviewId));
 
-            // Set the gameIds in the Events object
             user.setEventIds(Collections.singletonList(eventId));
 
             User savedUser = _userService.save(user);

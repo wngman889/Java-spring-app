@@ -1,9 +1,7 @@
 package com.restapi.models;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +27,7 @@ public class Reviews {
     private List<Integer> gameIds;
 
     @ElementCollection
-    @CollectionTable(name = "user_games", joinColumns = @JoinColumn(name = "review_id"))
+    @CollectionTable(name = "user_reviews_recommendations", joinColumns = @JoinColumn(name = "review_id"))
     @Column(name = "user_id")
     private List<Integer> userIds;
 

@@ -56,14 +56,21 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>1.5.5.Final</version> <!-- Example version, use the latest version -->
+			<version>1.5.5.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
-			<version>1.5.5.Final</version> <!-- Use the same version as mapstruct -->
+			<version>1.5.5.Final</version>
 			<scope>provided</scope>
 		</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>5.3.1</version>
+				<scope>test</scope>
+			</dependency>
 
     </dependencies>
 
