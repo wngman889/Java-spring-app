@@ -97,9 +97,8 @@ public class EventsController {
 
     @PutMapping("/update-event")
     public Events updateEvent(@RequestBody Events event) {
-        Events dbEvent = _eventsService.save(event);
 
-        return dbEvent;
+        return _eventsService.save(event);
     }
 
     @DeleteMapping("/delete-event")
