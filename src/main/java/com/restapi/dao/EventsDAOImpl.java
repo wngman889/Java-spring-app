@@ -37,10 +37,9 @@ public class EventsDAOImpl implements CustomDAO<Events> {
     @Override
     public Events save(Events saveInDB) {
 
-        Events mappedEvents = _eventsMapper.eventsToEvents(saveInDB);
+        //Events mappedEvents = _eventsMapper.eventsToEvents(saveInDB);
 
-        // Perform the merge with the converted Events
-        return _entityManager.merge(mappedEvents);
+        return _entityManager.merge(saveInDB);
     }
 
     @Override

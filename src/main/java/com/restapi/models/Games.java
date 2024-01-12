@@ -1,5 +1,6 @@
 package com.restapi.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -21,16 +22,26 @@ public class Games {
     @Column(name="genre")
     private String genre;
 
-    @ManyToMany(mappedBy = "games", cascade = {CascadeType.DETACH,
+    @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})
-    private List<Reviews> gameReviews = new ArrayList<>();
+    @JoinTable(
+            name = "games_reviews_recommendations",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "review_id")
+    )
+    private List<Reviews> gameReviews;
 
-    @ManyToMany(mappedBy = "games", cascade = {CascadeType.DETACH,
+    @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})
+    @JoinTable(
+            name = "events_games",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
     private List<Events> gameEvents = new ArrayList<>();
 
     public Games() {

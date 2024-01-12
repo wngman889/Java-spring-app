@@ -1,5 +1,6 @@
 package com.restapi.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="event_participants")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class EventParticipants {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,7 @@
 package com.restapi.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jdk.jfr.Event;
 
@@ -22,16 +24,31 @@ public class Events {
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})
-    private List<Games> games = new ArrayList<>();
+    @JoinTable(
+            name = "events_games",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
+    private List<Games> games;
 
     @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.REMOVE})
-    private List<User> users = new ArrayList<>();
+    @JoinTable(
+            name = "events_users",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
 
     public Events() {
 
+    }
+
+    public Events(Date date, String description) {
+        this.date = date;
+        this.description = description;
     }
 
     public int getId() {
