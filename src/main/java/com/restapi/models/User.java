@@ -34,29 +34,31 @@ public class User {
     @Column(name="steam_id")
     private String steamId;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    private List<Reviews> userReviews = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "user_reviews_recommendations", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "review_id")
+    private List<Integer> reviewsIds;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.REMOVE})
-    private List<Events> userEvents = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "events_users", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "event_id")
+    private List<Integer> eventIds;
 
     public User() {
 
     }
 
-    public User(String username, String password, String email, String profileDesc, Date createdAt, String steamId) {
+    public User(String username, String password, String email, String profileDesc,
+                Date createdAt, String steamId, List<Integer> reviewsIds,
+                List<Integer> eventIds) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.profileDesc = profileDesc;
         this.createdAt = createdAt;
         this.steamId = steamId;
+        this.reviewsIds = reviewsIds;
+        this.eventIds = eventIds;
     }
 
     public int getId() {
@@ -115,20 +117,20 @@ public class User {
         this.steamId = steamId;
     }
 
-    public List<Reviews> getUserReviews() {
-        return userReviews;
+    public List<Integer> getReviewsIds() {
+        return reviewsIds;
     }
 
-    public void setUserReviews(List<Reviews> userReviews) {
-        this.userReviews = userReviews;
+    public void setReviewsIds(List<Integer> reviewsIds) {
+        this.reviewsIds = reviewsIds;
     }
 
-    public List<Events> getUserEvents() {
-        return userEvents;
+    public List<Integer> getEventIds() {
+        return eventIds;
     }
 
-    public void setUserEvents(List<Events> userEvents) {
-        this.userEvents = userEvents;
+    public void setEventIds(List<Integer> eventIds) {
+        this.eventIds = eventIds;
     }
 
     @Override
