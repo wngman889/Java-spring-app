@@ -1,6 +1,5 @@
 package com.restapi.services;
 
-import com.restapi.models.Events;
 
 import java.util.List;
 

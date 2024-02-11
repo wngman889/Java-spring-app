@@ -83,7 +83,7 @@ public class EventsController {
             event.setUserIds(Collections.singletonList(userId));
 
             // Set the gameIds in the Events object
-            event.setGameIds(Collections.singletonList(gameId));
+            //event.setGameIds(Collections.singletonList(gameId));
 
             Events savedEvent = _eventsService.save(event);
 

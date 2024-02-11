@@ -16,20 +16,20 @@ public class Events {
 
     private String description;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
-//            CascadeType.MERGE,
-//            CascadeType.REFRESH,
-//            CascadeType.REMOVE})
-//    @JoinTable(
-//            name = "events_games",
-//            joinColumns = @JoinColumn(name = "event_id"),
-//            inverseJoinColumns = @JoinColumn(name = "game_id")
-//    )
-//    private List<Games> games;
-    @ElementCollection
-    @CollectionTable(name = "events_games", joinColumns = @JoinColumn(name = "event_id"))
-    @Column(name = "game_id")
-    private List<Integer> gameIds;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.REMOVE})
+    @JoinTable(
+            name = "events_games",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
+    private List<Games> games;
+//    @ElementCollection
+//    @CollectionTable(name = "events_games", joinColumns = @JoinColumn(name = "event_id"))
+//    @Column(name = "game_id")
+//    private List<Integer> gameIds;
 
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,
 //            CascadeType.MERGE,
@@ -53,7 +53,6 @@ public class Events {
     public Events(Date date, String description, List<Integer> gameIds, List<Integer> userIds) {
         this.date = date;
         this.description = description;
-        this.gameIds = gameIds;
         this.userIds = userIds;
     }
 
@@ -81,20 +80,20 @@ public class Events {
         this.description = description;
     }
 
-    public List<Integer> getGameIds() {
-        return gameIds;
-    }
-
-    public void setGameIds(List<Integer> gameIds) {
-        this.gameIds = gameIds;
-    }
-
     public List<Integer> getUserIds() {
         return userIds;
     }
 
     public void setUserIds(List<Integer> userIds) {
         this.userIds = userIds;
+    }
+
+    public List<Games> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Games> games) {
+        this.games = games;
     }
 
     @Override

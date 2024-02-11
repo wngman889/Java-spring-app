@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -66,20 +67,20 @@ public class UserController {
     }
 
     @PostMapping("/addUser/{username}, {password}, {email}, {profileDesc}, {reviewId}, {eventId}")
-    public ResponseEntity<User> addUser(@RequestBody User user,
-                                           @PathVariable String username,
-                                           @PathVariable String password,
-                                           @PathVariable String email,
-                                           @PathVariable String profileDesc,
-                                           @PathVariable int reviewId,
-                                           @PathVariable int eventId) {
+    public ResponseEntity<User> addUser(@PathVariable String username,
+                                        @PathVariable String password,
+                                        @PathVariable String email,
+                                        @PathVariable String profileDesc,
+                                        @PathVariable int reviewId,
+                                        @PathVariable int eventId) {
         try {
-            if (user.getId() != 0) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setEmail(email);
+            user.setProfileDesc(profileDesc);
+            user.setCreatedAt(new Date());
             user.setReviewsIds(Collections.singletonList(reviewId));
-
             user.setEventIds(Collections.singletonList(eventId));
 
             User savedUser = _userService.save(user);
@@ -87,7 +88,6 @@ public class UserController {
             return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 
         } catch (Exception e) {
-
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
