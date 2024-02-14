@@ -65,21 +65,12 @@ public class ReviewsController {
         }
     }
 
-    @PostMapping("/addReview/{reviewTitle}, {rating}, {reviewDescription}, {gameId}, {userId}")
-    public ResponseEntity<Reviews> addReview(@RequestBody Reviews review,
-                                         @PathVariable String reviewTitle,
-                                         @PathVariable String rating,
-                                         @PathVariable String reviewDescription,
-                                         @PathVariable int gameId,
-                                         @PathVariable int userId) {
+    @PostMapping("/addReview")
+    public ResponseEntity<Reviews> addReview(@RequestBody Reviews review) {
         try {
             if (review.getId() != 0) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-
-            review.setGameIds(Collections.singletonList(gameId));
-
-            review.setUserIds(Collections.singletonList(userId));
 
             Reviews savedReview = _reviewsService.save(review);
 

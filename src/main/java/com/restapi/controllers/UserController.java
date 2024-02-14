@@ -66,23 +66,9 @@ public class UserController {
         }
     }
 
-    @PostMapping("/addUser/{username}, {password}, {email}, {profileDesc}, {reviewId}, {eventId}")
-    public ResponseEntity<User> addUser(@PathVariable String username,
-                                        @PathVariable String password,
-                                        @PathVariable String email,
-                                        @PathVariable String profileDesc,
-                                        @PathVariable int reviewId,
-                                        @PathVariable int eventId) {
+    @PostMapping("/addUser")
+    public ResponseEntity<User> addUser(@RequestBody User user) {
         try {
-            User user = new User();
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setEmail(email);
-            user.setProfileDesc(profileDesc);
-            user.setCreatedAt(new Date());
-            user.setReviewsIds(Collections.singletonList(reviewId));
-            user.setEventIds(Collections.singletonList(eventId));
-
             User savedUser = _userService.save(user);
 
             return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
@@ -99,25 +85,25 @@ public class UserController {
     }
 
     @DeleteMapping("/delete-user")
-    public ResponseEntity<User> deleteUser(@RequestBody User user) {
+    public ResponseEntity<User> deleteUser(@RequestBody Integer userId) {
         try {
-            User userInDb = _userService.findById(user.getId());
+            User userInDb = _userService.findById(userId);
 
             if (userInDb == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
 
-            _userService.deleteById(user.getId());
+            _userService.deleteById(userId);
 
             return new ResponseEntity<>(userInDb, HttpStatus.OK);
         }
         catch (NoSuchElementException e) {
-            logger.warn("User with ID {} not found", user.getId(), e);
+            logger.warn("User with ID {} not found", userId, e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         catch (Exception e) {
-            logger.error("Exception occurred while fetching user with ID " + user.getId(), e);
+            logger.error("Exception occurred while fetching user with ID " + userId, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

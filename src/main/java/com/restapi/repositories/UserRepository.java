@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-//    @Query(
-//            value = "SELECT game_id FROM user_games WHERE user_id = :userId",
-//            nativeQuery = true
-//    )
-//    List<Integer> findGamesIdsByUserId(@Param("userId") int userId);
+    @Query(
+            value = "SELECT game_id FROM user_games WHERE user_id = :userId",
+            nativeQuery = true
+    )
+    List<Integer> findGamesIdsByUserId(@Param("userId") int userId);
 }

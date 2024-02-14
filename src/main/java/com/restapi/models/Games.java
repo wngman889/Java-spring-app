@@ -20,12 +20,12 @@ public class Games {
     @Column(name="genre")
     private String genre;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "games_reviews_recommendations", joinColumns = @JoinColumn(name = "game_id"))
     @Column(name = "review_id")
     private List<Integer> reviewIds;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "events_games", joinColumns = @JoinColumn(name = "game_id"))
     @Column(name = "event_id")
     private List<Integer> eventIds;

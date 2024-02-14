@@ -65,21 +65,12 @@ public class GamesController {
         }
     }
 
-    @PostMapping("/addGame/{title}, {gameDescription}, {genre}, {reviewsId}, {eventIds}")
-    public ResponseEntity<Games> addGame(@RequestBody Games game,
-                                           @PathVariable String title,
-                                           @PathVariable String description,
-                                           @PathVariable String genre,
-                                           @PathVariable int reviewId,
-                                           @PathVariable int eventId) {
+    @PostMapping("/addGame")
+    public ResponseEntity<Games> addGame(@RequestBody Games game) {
         try {
             if (game.getId() != 0) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-
-            game.setReviewIds(Collections.singletonList(reviewId));
-
-            game.setEventIds(Collections.singletonList(eventId));
 
             Games savedGame = _gamesService.save(game);
 

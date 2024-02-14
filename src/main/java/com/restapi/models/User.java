@@ -33,12 +33,12 @@ public class User {
     @Column(name="steam_id")
     private String steamId;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "user_reviews_recommendations", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "review_id")
     private List<Integer> reviewsIds;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "events_users", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "event_id")
     private List<Integer> eventIds;

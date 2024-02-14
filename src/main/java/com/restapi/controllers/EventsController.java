@@ -68,19 +68,15 @@ public class EventsController {
         }
     }
 
-    @PostMapping("/addEvent/{date}, {description}, {gameId}, {userId}")
-    public ResponseEntity<Events> addEvent(@RequestBody Events event,
-                                           @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date date,
-                                           @PathVariable String description,
-                                           @PathVariable int gameId,
-                                           @PathVariable int userId) {
+    @PostMapping("/addEvent")
+    public ResponseEntity<Events> addEvent(@RequestBody Events event) {
         try {
             if (event.getId() != 0) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 
             // Set the userIds in the Events object
-            event.setUserIds(Collections.singletonList(userId));
+            //event.setUserIds(Collections.singletonList(userId));
 
             // Set the gameIds in the Events object
             //event.setGameIds(Collections.singletonList(gameId));

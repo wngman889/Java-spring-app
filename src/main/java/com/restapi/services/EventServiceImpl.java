@@ -1,6 +1,7 @@
 package com.restapi.services;
 
 import com.restapi.models.Events;
+import com.restapi.models.Games;
 import com.restapi.repositories.EventsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.Optional;
 @Service
 public class EventServiceImpl implements CustomService<Events> {
     private EventsRepository _eventsRepository;
+    private Games game;
 
     @Autowired
     public EventServiceImpl(EventsRepository _eventsRepository) {

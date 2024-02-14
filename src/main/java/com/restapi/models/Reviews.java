@@ -21,12 +21,12 @@ public class Reviews {
     @Column(name="review_description")
     private String reviewDescription;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "games_reviews_recommendations", joinColumns = @JoinColumn(name = "review_id"))
     @Column(name = "game_id")
     private List<Integer> gameIds;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "user_reviews_recommendations", joinColumns = @JoinColumn(name = "review_id"))
     @Column(name = "user_id")
     private List<Integer> userIds;
